@@ -15,7 +15,8 @@ const Dog = mongoose.model('Dog', dogSchema)
 
 module.exports = Dog
 
-/*
-Following class notes and should be deleted later for submission
-
-*/
+const articleSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    body: {type: String, required: true},
+    slug: {type: String, required: true}
+})
