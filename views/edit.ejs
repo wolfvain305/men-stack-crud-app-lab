@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit <%=dog.name%></title>
+  <title>Edit a Dog with id <%= dog._id%>!</title>
 </head>
 <body>
-  <h1>Edit <%= dog.name %></h1>
-  <form action="/dogs/<%=dog._id%>?_method=PUT" method="POST">
+  <h1>Edit <%= dog._id %> !</h1>
+  <form action="/dogs/<%=dog_.id%>?_method=PUT" method="POST">
     <label for="name">Name:</label>
-    <input type="text" name="name" value="<%= dog.name %>" />
-    <label for="goodDog">Ready to play?</label>
-    <input
-      type="checkbox"
-      name="goodDog"
-      <% if (dog.goodDog) { %>checked<% } %> 
-      />
-    <button type="submit">Update Dog type</button>
+    <input type="text" name="name" id="name" value= "<%= dog.text %>"/>
+    <label for="goodDog">Ready to join the others?</label>
+    <input 
+    type="checkbox" 
+    name="goodDog" 
+    id="goodDog" 
+    <% if(dog.goodDog){ %>
+      checked
+    <% } %> />
+    <button type="submit">Edit Dog</button>
   </form>
-  <a href="/dogs">Back to the dogs</a>
+  <a href="/dogs/<%=note._id%>">Back to Dog Page <%=note._id%> </a>
 </body>
 </html>
-  
