@@ -21,18 +21,8 @@ mongoose.connection.on('error', () => {
     console.log('Mongo is trippin!')
 })
 
-/*-------------------------------- Functions needed to be Added --------------------------------*/
-//New
+/*-------------------------------- controller & router logic --------------------------------*/
 
-//Update
-app.put('/dogs/:id', async (req, res) => {
-    try {
-        const updateDog = await Dog.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true})
-        res.json(updateDog)
-    } catch (error) {
-        res.status(400).json({ msg: error.message})
-    }
-})
 //Create
 app.post('/dogs', async (req,res) => {
     req.body.isRead === 'on' || req.body.isRead === true?
@@ -60,12 +50,22 @@ app.get('/dogs', async (req, res) => {
 
 app.get('/dogs/:id', async (req, res) => {
     try {
-            const foundDog = await Dog.findOne({ _id: req.params.id })
-            res.render('show.ejs') , {
-                dog: foundDog
-            }
+        const foundDog = await Dog.findOne({ _id: req.params.id })
+        res.render('show.ejs') , {
+            dog: foundDog
+        }
     } catch (error) {
         res.status(400).json({ msg: error.message })
+    }
+})
+
+//Update
+app.put('/dogs/:id', async (req, res) => {
+    try {
+        const updateDog = await Dog.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true})
+        res.json(updateDog)
+    } catch (error) {
+        res.status(400).json({ msg: error.message})
     }
 })
 
