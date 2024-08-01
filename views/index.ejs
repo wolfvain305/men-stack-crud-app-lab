@@ -6,13 +6,13 @@
   <title>Dog Index</title>
 </head>
 <body>
-  <a href="/dogss/new">Add Dog</a>
+  <a href="/dogs/new">Add Dog</a>
   <h1>All Dogs</h1>
   <ul>
     <% dogs.forEach((dog) => { %>
       <li>
         <a href="/dogs/<%=dog._id%>">
-          <%= dog.name %>
+          <%= dog.text %>
         </a>
       </li>
     <% }) %>

@@ -14,7 +14,7 @@
   <% } %>
   <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">
     <button type="submit">
-      Delete <%= dog.name %>
+      Delete <%= dog._id %>
     </button>
   </form>
   <a href="/dogs/<%= dog._id %>/edit">Edit <%= dog.name %></a>
