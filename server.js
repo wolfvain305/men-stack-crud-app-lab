@@ -8,6 +8,7 @@ const Dog = require('./models/dog.js')
 const logger = require('morgan')
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
 app.use(logger('tiny'))
 
 mongoose.connect(MONGO_URI)
@@ -22,6 +23,7 @@ mongoose.connection.on('error', () => {
 
 /*-------------------------------- Functions needed to be Added --------------------------------*/
 //New
+
 //Update
 app.put('/dogs/:id', async (req, res) => {
     try {
@@ -33,21 +35,23 @@ app.put('/dogs/:id', async (req, res) => {
 })
 //Create
 app.post('/dogs', async (req,res) => {
-    req.body.goodDog
+    req.body.isRead === 'on' || req.body.isRead === true?
+    req.body.isRead = true :
+    req.body.isRead = false
     try {
         const createdDog = await Dog.create(req.body)
-        res.json(createdDog)
+        res.redirect('/dogs${creadtedDog._id}')
     } catch (error) {
-        console.error(error)
         res.status(400).json({ message: error.message})
     }
 })
-// Edit
 // Index and Show
 app.get('/dogs', async (req, res) => {
     try {
         const foundDogs = await Dog.find({})
-        res.json(foundDogs)
+        res.render('index.ejs'), {
+            dogs: foundDogs
+        }
     } catch (error) {
         console.error(error)
         res.status(400).json({ message: error.message})
@@ -57,7 +61,9 @@ app.get('/dogs', async (req, res) => {
 app.get('/dogs/:id', async (req, res) => {
     try {
             const foundDog = await Dog.findOne({ _id: req.params.id })
-            res.json(foundDog)
+            res.render('show.ejs') , {
+                dog: foundDog
+            }
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
